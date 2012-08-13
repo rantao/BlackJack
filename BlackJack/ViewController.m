@@ -13,7 +13,9 @@
 @interface ViewController ()
 @property (nonatomic, strong) Deck* deck;
 @property (nonatomic, strong) Hand* dealersHand;
-@property (nonatomic, strong) Hand* playersHand;
+//@property (nonatomic, strong) Hand* playersHand;
+@property (nonatomic, strong) NSMutableArray* playerHands;
+@property (nonatomic) int currentHandIndex;
 @property (nonatomic) int wins;
 @property (nonatomic) int losses;
 @property (nonatomic) bool gameStarted;
@@ -21,6 +23,7 @@
 
 @implementation ViewController
 @synthesize gameStarted = _gameStarted;
+@synthesize playerHands = _playerHands;
 @synthesize dealButton = _dealButton;
 @synthesize playersHandText = _playersHandText;
 @synthesize hitButton = _hitButton;
@@ -31,7 +34,8 @@
 @synthesize splitButton = _splitButton;
 @synthesize numLosses = _numLosses;
 @synthesize dealersHand = _dealersHand;
-@synthesize playersHand = _playersHand;
+//@synthesize playersHand = _playersHand;
+@synthesize currentHandIndex = _currentHandIndex;
 @synthesize deck = _deck;
 @synthesize wins = _wins;
 @synthesize losses = _losses;
@@ -40,6 +44,13 @@
     UIAlertView* alert = [[UIAlertView alloc]
                           initWithTitle:title message:msg delegate:nil cancelButtonTitle:btn otherButtonTitles:nil];
     [alert show];
+}
+
+-(NSMutableArray *) playerHands {
+    if (!_playerHands) {
+        _playerHands = [NSMutableArray new];
+    }
+    return _playerHands;
 }
 
 -(void) playerWins:(NSString*) msg {
@@ -73,6 +84,7 @@
     [self.hitButton setHidden:val];
     [self.stayButton setHidden:val];
     [self.dealButton setHidden:!val];
+    [self.doubleDownButton setHidden:val];
 }
 
 - (bool) needNewDeck {
@@ -95,27 +107,39 @@
 - (void) dealFirstTwoCards {
     self.dealersHand = [Hand new];
     self.dealersHand.isDealersHand = YES;
-    self.playersHand = [Hand new];
-    [self.playersHand.cards addObject:[self.deck dealCard]];
+    Hand* playersHand = [Hand new];
+    [playersHand.cards addObject:[self.deck dealCard]];
     [self.dealersHand.cards addObject:[self.deck dealCard]];
-    [self.playersHand.cards addObject:[self.deck dealCard]];
+    [playersHand.cards addObject:[self.deck dealCard]];
     [self.dealersHand.cards addObject:[self.deck dealCard]];
+    [self.playerHands addObject:playersHand];
     
 }
 
 -(void) updateHands {
     self.dealersHandText.text = [NSString stringWithFormat:@"%@",self.dealersHand];
-    self.playersHandText.text = [NSString stringWithFormat:@"%@",self.playersHand];
+    
+    //self.playersHandText.text = [NSString stringWithFormat:@"%@",self.playersHand];
+    NSMutableString* handsString = [NSMutableString new];
+    for (int i=0; i < [self.playerHands count]; i++) {
+        if (self.currentHandIndex ==i) {
+            [handsString appendString:@"**==>"];
+        }
+        Hand * handAtIndex = [self.playerHands objectAtIndex:i];
+        [handsString appendFormat:@"%@\n\n",handAtIndex];
+    }
+    self.playersHandText.text = handsString;
 }
 
 -(bool) checkForBlackJack {
-    if ( [self.dealersHand isBlackJack] && [self.playersHand isBlackJack] ) {
+    Hand* playersHand = [self.playerHands objectAtIndex:self.currentHandIndex];
+    if ( [self.dealersHand isBlackJack] && [playersHand isBlackJack] ) {
         [self playerTies:@"Both player and dealer have blackjack!"];
         return YES;
     } else if ( [self.dealersHand isBlackJack] ) {
         [self playerLoses:@"=("];
         return YES;
-    } else if ( [self.playersHand isBlackJack] ) {
+    } else if ( [playersHand isBlackJack] ) {
         [self playerWins:@"=)"];
         return YES;
     }
@@ -125,6 +149,8 @@
     [self hidePlayerButtons:YES];
     [self.doubleDownButton setHidden:NO];
     [self checkIfNewDeckNeeded];
+    self.playerHands = nil;
+    self.currentHandIndex = 0;
     [self dealFirstTwoCards];
     [self updateHands];
     self.gameStarted = YES;
@@ -137,13 +163,18 @@
 - (IBAction)doubleDownPressed:(UIButton *)sender {
     [self hidePlayerButtons:YES];
     self.doubleDownButton.hidden = YES;
-    [self.playersHand.cards addObject:[self.deck dealCard]];
+      Hand* playersHand = [self.playerHands objectAtIndex:self.currentHandIndex];
+    [playersHand.cards addObject:[self.deck dealCard]];
     [self updateHands];
-    if (self.playersHand.value > 21) {
+    if (playersHand.value > 21) {
         [self playerLoses:@"You busted!"];
         return;
     }
-    [self dealersTurn];
+    self.currentHandIndex++;
+    [self updateHands];
+    if (self.currentHandIndex >= [self.playerHands count]) {
+        [self dealersTurn];
+    }
 }
 
 - (IBAction)splitPressed:(UIButton *)sender {
@@ -151,9 +182,10 @@
 
 
 -(void) determineWinner {
-    if ( self.dealersHand.value == self.playersHand.value ) {
+      Hand* playersHand = [self.playerHands objectAtIndex:self.currentHandIndex-1];
+    if ( self.dealersHand.value == playersHand.value ) {
         [self playerTies:@"It's a push!!"];
-    } else if ( self.playersHand.value > self.dealersHand.value ) {
+    } else if (playersHand.value > self.dealersHand.value ) {
         [self playerWins:@"yay!!"]; 
 
     } else {
@@ -174,17 +206,21 @@
 }
 
 - (IBAction)playerHitorStay:(UIButton *)sender {
-
+  Hand* playersHand = [self.playerHands objectAtIndex:self.currentHandIndex];
     if ([sender.titleLabel.text isEqualToString:@"Hit"]) {
-        [self.playersHand.cards addObject:[self.deck dealCard]];
+        [playersHand.cards addObject:[self.deck dealCard]];
         [self updateHands];
         
-        if (self.playersHand.value > 21) {
+        if (playersHand.value > 21) {
             [self playerLoses:@"You busted!"];
         }
     } else if ([sender.titleLabel.text isEqualToString:@"Stay"]) {
         [self hidePlayerButtons:YES];
-        [self dealersTurn];
+        self.currentHandIndex++;
+        //[self updateHands];
+        if (self.currentHandIndex >= [self.playerHands count]) {
+            [self dealersTurn];
+        }
     }
     [self.doubleDownButton setHidden:YES];
 }
@@ -199,7 +235,7 @@
 - (void)viewDidUnload
 {
     [self setDealersHand:nil];
-    [self setPlayersHand:nil];
+    [self setPlayerHands:nil];
     [self setHitButton:nil];
     [self setStayButton:nil];
     [self setNumWins:nil];
