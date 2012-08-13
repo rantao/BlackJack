@@ -1,0 +1,300 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		64C2512015D58A470021B379 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C2511F15D58A470021B379 /* UIKit.framework */; };
+		64C2512215D58A470021B379 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C2512115D58A470021B379 /* Foundation.framework */; };
+		64C2512415D58A470021B379 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C2512315D58A470021B379 /* CoreGraphics.framework */; };
+		64C2512A15D58A470021B379 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64C2512815D58A470021B379 /* InfoPlist.strings */; };
+		64C2512C15D58A470021B379 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C2512B15D58A470021B379 /* main.m */; };
+		64C2513015D58A470021B379 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C2512F15D58A470021B379 /* AppDelegate.m */; };
+		64C2513315D58A470021B379 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64C2513115D58A470021B379 /* MainStoryboard.storyboard */; };
+		64C2513615D58A470021B379 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C2513515D58A470021B379 /* ViewController.m */; };
+		64C2513E15D58AD20021B379 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C2513D15D58AD20021B379 /* Card.m */; };
+		64C2514115D58B450021B379 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C2514015D58B450021B379 /* Deck.m */; };
+		64C2514415D5C4150021B379 /* Hand.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C2514315D5C4150021B379 /* Hand.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		64C2511B15D58A470021B379 /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		64C2511F15D58A470021B379 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		64C2512115D58A470021B379 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		64C2512315D58A470021B379 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		64C2512715D58A470021B379 /* BlackJack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlackJack-Info.plist"; sourceTree = "<group>"; };
+		64C2512915D58A470021B379 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		64C2512B15D58A470021B379 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		64C2512D15D58A470021B379 /* BlackJack-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlackJack-Prefix.pch"; sourceTree = "<group>"; };
+		64C2512E15D58A470021B379 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		64C2512F15D58A470021B379 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		64C2513215D58A470021B379 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		64C2513415D58A470021B379 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		64C2513515D58A470021B379 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		64C2513C15D58AD20021B379 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		64C2513D15D58AD20021B379 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		64C2513F15D58B450021B379 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		64C2514015D58B450021B379 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		64C2514215D5C4150021B379 /* Hand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hand.h; sourceTree = "<group>"; };
+		64C2514315D5C4150021B379 /* Hand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hand.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		64C2511815D58A470021B379 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64C2512015D58A470021B379 /* UIKit.framework in Frameworks */,
+				64C2512215D58A470021B379 /* Foundation.framework in Frameworks */,
+				64C2512415D58A470021B379 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		64C2511015D58A470021B379 = {
+			isa = PBXGroup;
+			children = (
+				64C2512515D58A470021B379 /* BlackJack */,
+				64C2511E15D58A470021B379 /* Frameworks */,
+				64C2511C15D58A470021B379 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		64C2511C15D58A470021B379 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64C2511B15D58A470021B379 /* BlackJack.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64C2511E15D58A470021B379 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				64C2511F15D58A470021B379 /* UIKit.framework */,
+				64C2512115D58A470021B379 /* Foundation.framework */,
+				64C2512315D58A470021B379 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64C2512515D58A470021B379 /* BlackJack */ = {
+			isa = PBXGroup;
+			children = (
+				64C2512E15D58A470021B379 /* AppDelegate.h */,
+				64C2512F15D58A470021B379 /* AppDelegate.m */,
+				64C2513115D58A470021B379 /* MainStoryboard.storyboard */,
+				64C2513C15D58AD20021B379 /* Card.h */,
+				64C2513D15D58AD20021B379 /* Card.m */,
+				64C2513F15D58B450021B379 /* Deck.h */,
+				64C2514015D58B450021B379 /* Deck.m */,
+				64C2514215D5C4150021B379 /* Hand.h */,
+				64C2514315D5C4150021B379 /* Hand.m */,
+				64C2513415D58A470021B379 /* ViewController.h */,
+				64C2513515D58A470021B379 /* ViewController.m */,
+				64C2512615D58A470021B379 /* Supporting Files */,
+			);
+			path = BlackJack;
+			sourceTree = "<group>";
+		};
+		64C2512615D58A470021B379 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				64C2512715D58A470021B379 /* BlackJack-Info.plist */,
+				64C2512815D58A470021B379 /* InfoPlist.strings */,
+				64C2512B15D58A470021B379 /* main.m */,
+				64C2512D15D58A470021B379 /* BlackJack-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64C2511A15D58A470021B379 /* BlackJack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64C2513915D58A470021B379 /* Build configuration list for PBXNativeTarget "BlackJack" */;
+			buildPhases = (
+				64C2511715D58A470021B379 /* Sources */,
+				64C2511815D58A470021B379 /* Frameworks */,
+				64C2511915D58A470021B379 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlackJack;
+			productName = BlackJack;
+			productReference = 64C2511B15D58A470021B379 /* BlackJack.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64C2511215D58A470021B379 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 64C2511515D58A470021B379 /* Build configuration list for PBXProject "BlackJack" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 64C2511015D58A470021B379;
+			productRefGroup = 64C2511C15D58A470021B379 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64C2511A15D58A470021B379 /* BlackJack */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		64C2511915D58A470021B379 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64C2512A15D58A470021B379 /* InfoPlist.strings in Resources */,
+				64C2513315D58A470021B379 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		64C2511715D58A470021B379 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64C2512C15D58A470021B379 /* main.m in Sources */,
+				64C2513015D58A470021B379 /* AppDelegate.m in Sources */,
+				64C2513615D58A470021B379 /* ViewController.m in Sources */,
+				64C2513E15D58AD20021B379 /* Card.m in Sources */,
+				64C2514115D58B450021B379 /* Deck.m in Sources */,
+				64C2514415D5C4150021B379 /* Hand.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		64C2512815D58A470021B379 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64C2512915D58A470021B379 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		64C2513115D58A470021B379 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64C2513215D58A470021B379 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		64C2513715D58A470021B379 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		64C2513815D58A470021B379 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		64C2513A15D58A470021B379 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BlackJack/BlackJack-Prefix.pch";
+				INFOPLIST_FILE = "BlackJack/BlackJack-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		64C2513B15D58A470021B379 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BlackJack/BlackJack-Prefix.pch";
+				INFOPLIST_FILE = "BlackJack/BlackJack-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		64C2511515D58A470021B379 /* Build configuration list for PBXProject "BlackJack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64C2513715D58A470021B379 /* Debug */,
+				64C2513815D58A470021B379 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64C2513915D58A470021B379 /* Build configuration list for PBXNativeTarget "BlackJack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64C2513A15D58A470021B379 /* Debug */,
+				64C2513B15D58A470021B379 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64C2511215D58A470021B379 /* Project object */;
+}
