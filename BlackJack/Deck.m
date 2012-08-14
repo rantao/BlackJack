@@ -22,7 +22,7 @@
 
 -(NSArray*) suits {
     if (!_suits) {
-        _suits = [[NSArray alloc] initWithObjects:@"Hearts",@"Spades",@"Clubs",@"Diamonds", nil];
+        _suits = [[NSArray alloc] initWithObjects:@"♥",@"♠",@"♣",@"♦", nil];
     }
     return _suits;
 }

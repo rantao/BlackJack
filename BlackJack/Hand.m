@@ -11,6 +11,7 @@
 @implementation Hand
 
 @synthesize cards = _cards;
+@synthesize isBusted = _isBusted;
 @synthesize value = _value;
 @synthesize isDealersHand;
 
@@ -62,9 +63,9 @@
 
 -(NSString*) description {
     if (self.isDealersHand && [self.cards count] == 2) {
-        return [NSString stringWithFormat:@"[Dealer's first card hidden]\n%@",[self.cards objectAtIndex:1]];
+        return [NSString stringWithFormat:@"[hidden]\n%@",[self.cards objectAtIndex:1]];
     } else {
-        return [NSString stringWithFormat:[self.cards componentsJoinedByString:@"\n"]];
+        return [NSString stringWithFormat:[self.cards componentsJoinedByString:@" "]];
     }
 }
 

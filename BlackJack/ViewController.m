@@ -53,32 +53,40 @@
     return _playerHands;
 }
 
+-(void) nextHand {
+    self.currentHandIndex++;
+    [self updateHands];
+    if (self.currentHandIndex >= [self.playerHands count]) {
+        [self hidePlayerButtons:YES];
+        [self dealersTurn];
+        return;
+    }
+    Hand* currHand = [self.playerHands objectAtIndex:self.currentHandIndex];
+    if ([currHand isBlackJack]){
+        [self nextHand];
+        return;
+    }
+}
+
 -(void) playerWins:(NSString*) msg {
     [self showAlert:@"You win!!" withMessage:msg withButton:@"Deal another hand!!!"];
     self.numWins.text = [NSString stringWithFormat:@"%d",++self.wins];
-    [self hidePlayerButtons:YES];
-    
-    self.dealersHand.isDealersHand = NO;
-    [self updateHands];
 }
 
 -(void) playerLoses:(NSString*) msg {
-    [self showAlert:@"You lose!!" withMessage:msg withButton:@"Deal another hand!!!"];
+    [self showAlert:@"You lose!!" withMessage:msg withButton:@"Continue"];
     self.numLosses.text = [NSString stringWithFormat:@"%d",++self.losses];
-    [self hidePlayerButtons:YES];
-    
-    self.dealersHand.isDealersHand = NO;
-    [self updateHands];
 }
 
 -(void) playerTies:(NSString*) msg{
     [self showAlert:@"You tied!!" withMessage:msg withButton:@"Deal another hand!!!"];
-    [self hidePlayerButtons:YES];
-    
-    self.dealersHand.isDealersHand = NO;
-    [self updateHands];
 }
 
+-(void) playerBusted:(NSString*) msg {
+    Hand* currHand = [self.playerHands objectAtIndex:self.currentHandIndex];
+    currHand.isBusted = YES;
+    [self showAlert:@"You busted!!" withMessage:msg withButton:@"Continue"];
+}
 
 -(void) hidePlayerButtons:(bool)val {
     [self.hitButton setHidden:val];
@@ -114,6 +122,11 @@
     [self.dealersHand.cards addObject:[self.deck dealCard]];
     [self.playerHands addObject:playersHand];
     
+    Card* firstCard = [[playersHand cards] objectAtIndex:0];
+    Card* secondCard = [[playersHand cards] lastObject];
+    if (firstCard.value == secondCard.value) {
+        [self.splitButton setHidden:NO];
+    }
 }
 
 -(void) updateHands {
@@ -122,8 +135,8 @@
     //self.playersHandText.text = [NSString stringWithFormat:@"%@",self.playersHand];
     NSMutableString* handsString = [NSMutableString new];
     for (int i=0; i < [self.playerHands count]; i++) {
-        if (self.currentHandIndex ==i) {
-            [handsString appendString:@"**==>"];
+        if (self.currentHandIndex ==i && [self.playerHands count]>1) {
+            [handsString appendString:@"====>"];
         }
         Hand * handAtIndex = [self.playerHands objectAtIndex:i];
         [handsString appendFormat:@"%@\n\n",handAtIndex];
@@ -132,7 +145,7 @@
 }
 
 -(bool) checkForBlackJack {
-    Hand* playersHand = [self.playerHands objectAtIndex:self.currentHandIndex];
+    Hand* playersHand = [self.playerHands objectAtIndex:0];
     if ( [self.dealersHand isBlackJack] && [playersHand isBlackJack] ) {
         [self playerTies:@"Both player and dealer have blackjack!"];
         return YES;
@@ -145,19 +158,31 @@
     }
     return NO;
 }
+
 - (IBAction)dealPressed {
-    [self hidePlayerButtons:YES];
-    [self.doubleDownButton setHidden:NO];
     [self checkIfNewDeckNeeded];
     self.playerHands = nil;
-    self.currentHandIndex = 0;
+    self.currentHandIndex = -1;
     [self dealFirstTwoCards];
     [self updateHands];
     self.gameStarted = YES;
-    if ([self checkForBlackJack])
+    if ([self checkForBlackJack]) {
+        self.dealersHand.isDealersHand = NO;
+        [self updateHands];
         return;
+    }
     [self hidePlayerButtons:NO];
+    [self nextHand];
+}
 
+- (bool) areAllPlayerHandsBusted {
+    for (int i = 0; i < [self.playerHands count]; i++) {
+        Hand* currHand = [self.playerHands objectAtIndex:i];
+        if (!currHand.isBusted) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 - (IBAction)doubleDownPressed:(UIButton *)sender {
@@ -167,42 +192,90 @@
     [playersHand.cards addObject:[self.deck dealCard]];
     [self updateHands];
     if (playersHand.value > 21) {
-        [self playerLoses:@"You busted!"];
+        [self playerBusted:@"=("];
+        [self dealersTurn];
         return;
     }
-    self.currentHandIndex++;
-    [self updateHands];
-    if (self.currentHandIndex >= [self.playerHands count]) {
-        [self dealersTurn];
-    }
+    [self nextHand];
 }
 
 - (IBAction)splitPressed:(UIButton *)sender {
+    Hand* currHand = [self.playerHands objectAtIndex:self.currentHandIndex];
+    Card* firstCard = [currHand.cards objectAtIndex:0];
+    Card* secondCard = [currHand.cards lastObject];
+    
+    Hand* firstHand = [Hand new];
+    Hand* secondHand = [Hand new];
+    [firstHand.cards addObject:firstCard];
+    [firstHand.cards addObject:[self.deck dealCard]];
+    [secondHand.cards addObject:secondCard];
+    [secondHand.cards addObject:[self.deck dealCard]];
+    
+    [self.playerHands removeObjectAtIndex:self.currentHandIndex];
+    [self.playerHands addObject:firstHand];
+    [self.playerHands addObject:secondHand];
+    
+    [self updateHands];
+    [self.doubleDownButton setHidden:YES];
+    [self.splitButton setHidden:YES];
 }
 
 
 -(void) determineWinner {
-      Hand* playersHand = [self.playerHands objectAtIndex:self.currentHandIndex-1];
-    if ( self.dealersHand.value == playersHand.value ) {
-        [self playerTies:@"It's a push!!"];
-    } else if (playersHand.value > self.dealersHand.value ) {
-        [self playerWins:@"yay!!"]; 
 
+    NSMutableString* result = [NSMutableString new];
+    if (self.dealersHand.isBusted) {
+        [result appendFormat:@"Dealer busted with %d!\n", self.dealersHand.value];
+        for (int i = 0; i < [self.playerHands count]; i++) {
+            Hand * currentHand = [self.playerHands objectAtIndex:i];
+            if(!currentHand.isBusted) {
+                [result appendFormat:@"Hand %d won with %d!\n", i+1, currentHand.value];
+                self.numWins.text = [NSString stringWithFormat:@"%d",++self.wins];
+            }
+            else {
+                [result appendFormat:@"Hand %d busted as well...\n", i+1];
+            }
+        }
     } else {
-        [self playerLoses:@"nooooo!"];
+        [result appendFormat:@"Dealer has %d\n", self.dealersHand.value];
+        for (int i=0; i< [self.playerHands count]; i++) {
+            Hand *currentHand = [self.playerHands objectAtIndex:i];
+            if (currentHand.isBusted) {
+                [result appendFormat:@"Hand %d busted with %d...\n",i+1, currentHand.value];
+                self.numLosses.text = [NSString stringWithFormat:@"%d",++self.losses];
+            } else {
+                if (currentHand.value > self.dealersHand.value) {
+                    [result appendFormat:@"Hand %d won with %d!\n", i+1, currentHand.value];
+                    self.numWins.text = [NSString stringWithFormat:@"%d",++self.wins];
+                } else if (currentHand.value < self.dealersHand.value) {
+                    [result appendFormat:@"Hand %d lost with %d :(\n", i+1, currentHand.value];
+                    self.numLosses.text = [NSString stringWithFormat:@"%d",++self.losses];
+                } else {
+                    [result appendFormat:@"Hand %d pushed with %d\n", i+1, currentHand.value];
+                }
+            }
+        }
     }
+    
+    [self showAlert:@"Results" withMessage:result withButton:@"Play again!"];
+    
 }
 
 -(void) dealersTurn {
+    self.dealersHand.isDealersHand = NO;
+    if ([self areAllPlayerHandsBusted]) {
+        [self updateHands];
+        [self determineWinner];
+        return;
+    }
     while (self.dealersHand.value<17) {
         [self.dealersHand.cards addObject:[self.deck dealCard]];
-        [self updateHands];
     }
     if (self.dealersHand.value > 21) {
-        [self playerWins:@"Dealer busted!"];
-    } else {
-        [self determineWinner];
+        self.dealersHand.isBusted = YES;
     }
+    [self updateHands];
+    [self determineWinner];
 }
 
 - (IBAction)playerHitorStay:(UIButton *)sender {
@@ -212,17 +285,14 @@
         [self updateHands];
         
         if (playersHand.value > 21) {
-            [self playerLoses:@"You busted!"];
+            [self playerBusted:@"=("];
+            [self nextHand];
         }
     } else if ([sender.titleLabel.text isEqualToString:@"Stay"]) {
-        [self hidePlayerButtons:YES];
-        self.currentHandIndex++;
-        //[self updateHands];
-        if (self.currentHandIndex >= [self.playerHands count]) {
-            [self dealersTurn];
-        }
+        [self nextHand];
     }
     [self.doubleDownButton setHidden:YES];
+    [self.splitButton setHidden:YES];
 }
 
 

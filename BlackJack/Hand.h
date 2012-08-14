@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSMutableArray* cards;
 @property (nonatomic) int value;
 @property (nonatomic) bool isDealersHand;
+@property (nonatomic) bool isBusted;
 -(bool) isBlackJack;
 
 @end

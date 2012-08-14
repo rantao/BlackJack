@@ -21,7 +21,7 @@
 }
 
 -(NSString*) description {
-    NSString* ret = [NSString stringWithFormat:@"%@ %@ with value: %d", self.label, self.suit, self.value];
+    NSString* ret = [NSString stringWithFormat:@"[%@%@]", self.label, self.suit];
     return ret;
 }
 
