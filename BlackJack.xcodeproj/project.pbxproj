@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		256A8CFF15DCCCAA00829EAF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 256A8CFE15DCCCAA00829EAF /* Default.png */; };
+		256A8D0215DCCCAD00829EAF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 256A8D0115DCCCAD00829EAF /* Default@2x.png */; };
+		256A8D0415DCCCB700829EAF /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 256A8D0315DCCCB700829EAF /* Icon.png */; };
+		256A8D0615DCCCBA00829EAF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 256A8D0515DCCCBA00829EAF /* Icon@2x.png */; };
 		64C2512015D58A470021B379 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C2511F15D58A470021B379 /* UIKit.framework */; };
 		64C2512215D58A470021B379 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C2512115D58A470021B379 /* Foundation.framework */; };
 		64C2512415D58A470021B379 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C2512315D58A470021B379 /* CoreGraphics.framework */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		256A8CFE15DCCCAA00829EAF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		256A8D0115DCCCAD00829EAF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		256A8D0315DCCCB700829EAF /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		256A8D0515DCCCBA00829EAF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		64C2511B15D58A470021B379 /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C2511F15D58A470021B379 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		64C2512115D58A470021B379 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,6 +67,10 @@
 		64C2511015D58A470021B379 = {
 			isa = PBXGroup;
 			children = (
+				256A8D0515DCCCBA00829EAF /* Icon@2x.png */,
+				256A8D0315DCCCB700829EAF /* Icon.png */,
+				256A8D0115DCCCAD00829EAF /* Default@2x.png */,
+				256A8CFE15DCCCAA00829EAF /* Default.png */,
 				64C2512515D58A470021B379 /* BlackJack */,
 				64C2511E15D58A470021B379 /* Frameworks */,
 				64C2511C15D58A470021B379 /* Products */,
@@ -165,6 +177,10 @@
 			files = (
 				64C2512A15D58A470021B379 /* InfoPlist.strings in Resources */,
 				64C2513315D58A470021B379 /* MainStoryboard.storyboard in Resources */,
+				256A8CFF15DCCCAA00829EAF /* Default.png in Resources */,
+				256A8D0215DCCCAD00829EAF /* Default@2x.png in Resources */,
+				256A8D0415DCCCB700829EAF /* Icon.png in Resources */,
+				256A8D0615DCCCBA00829EAF /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

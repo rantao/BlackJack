@@ -51,7 +51,6 @@
             [self.cardDeck addObject:newCard];
         }
     }
-    NSLog(@"New Deck: %@",self.cardDeck);
 }
 
 -(Card*) dealCard {
